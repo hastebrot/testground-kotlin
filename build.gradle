@@ -1,0 +1,35 @@
+//-------------------------------------------------------------------------------------------------
+// ROOT PROJECT.
+//-------------------------------------------------------------------------------------------------
+
+project(":") { project ->
+    // provide assemble and clean tasks.
+    apply plugin: "base"
+
+    // task to add gradle wrapper files.
+    task wrapper(type: Wrapper) {
+        gradleVersion = "2.5"
+        distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+    }
+
+    // task to print gradle and groovy versions.
+    task versions(group: "help") << {
+        println "Java version: ${System.properties["java.version"]}"
+        println "Gradle version: ${project.gradle.gradleVersion}"
+        println "Groovy version: ${GroovySystem.version}"
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+// EACH PROJECT.
+//-------------------------------------------------------------------------------------------------
+
+allprojects { project ->
+    // task to create main and test source directories.
+    task sourceDirs(group: "build setup") << {
+        if (project != rootProject) {
+            sourceSets*.allSource.srcDirs*.each { it.mkdirs() }
+            sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+// list of subprojects.
+include "samples/general-samples"
+include "samples/squareup-samples"
+
+// build files of subprojects.
+rootProject.children.each { project ->
+    def projectDir = new File(project.name)
+    project.name = projectDir.name
+    project.projectDir = projectDir
+    project.buildFileName = "${projectDir.name}.gradle"
+}

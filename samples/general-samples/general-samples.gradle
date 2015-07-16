@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:0.12.613"
+    }
+}
+
+apply plugin: "kotlin"
+
+configurations.all {
+    //resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+}
+
+repositories {
+    //maven { url = "http://repository.jetbrains.com/repo" }
+    mavenCentral()
+}
+
+// main source dependencies.
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-compiler:0.12.613"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:0.12.613"
+
+    compile "com.google.guava:guava:18.0"
+    compile "com.google.inject:guice:4.0"
+}
+
+// test source dependencies.
+dependencies {
+    // junit test framework and hamcrest assertions.
+    testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+}
